@@ -1,0 +1,1 @@
+{"parameters":[{"name":"q","in":"query","description":"**City name**. *Example: brooklyn,us*.","schema":{"type":"string"}},{"name":"zip","in":"query","description":"**Zip code**. Search by zip code. *Example: 95050,us*.","schema":{"type":"string"}}]}

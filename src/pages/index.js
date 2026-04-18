@@ -3,6 +3,9 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import { ExperienceCard } from "@site/components/ExperienceCard";
+import { SkillBadge } from "@site/components/SkillBadge";
+import { MetricHighlight } from "@/components/MetricHighlight";
 
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
@@ -20,7 +23,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            Sample Getting Started guide 💡
           </Link>
         </div>
       </div>

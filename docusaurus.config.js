@@ -11,8 +11,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Obaidullah Khan | Technical Writer ',
-  tagline: 'Dinosaurs are cool',
+  title: 'Obaidullah Khan | Technical Writer (API) ',
+  tagline: 'Technical Writer specializing in static site generators, API-reference, user guides and manuals along with changelog',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -75,6 +75,28 @@ const config = {
     ],
   ],
 
+  plugins: [
+  [
+    'docusaurus-plugin-openapi-docs',
+    {
+      id: 'api',
+      docsPluginId: 'classic',
+      config: {
+        myapi: {
+          specPath: 'API-specs/openWeatherAPI-final.yaml',
+          outputDir: 'docs/api-reference',
+          sidebarOptions: {
+            groupPathsBy: 'tag',
+          },
+        },
+      },
+    },
+  ],
+],
+
+
+themes: ['docusaurus-theme-openapi-docs'],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -84,7 +106,7 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'My Site',
+        title: 'My Portfolio',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
@@ -92,13 +114,16 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'mySidebar',
             position: 'left',
             label: 'Portfolio',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            label: 'API Reference', to: '/docs/api-reference/Endpoints', position: 'left'
+          },
+          {to: '/changelog', label: 'Changelog', position: 'left'},
+          {
+            href: 'https://github.com/obaid31',
             label: 'GitHub',
             position: 'right',
           },
@@ -137,12 +162,12 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: 'Changelog',
+                to: '/changelog',
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/obaid31',
               },
             ],
           },
@@ -155,5 +180,8 @@ const config = {
       },
     }),
 };
+
+
+
 
 export default config;

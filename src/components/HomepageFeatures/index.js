@@ -2,6 +2,32 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
+
+import React from 'react';
+import Layout from '@theme/Layout';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+
+// 1. Import your MDX file as a component (must be capitalized)
+import MyMarkdownContent from './markdown-page.mdx';
+
+// 2. Import the MDX content wrapper so styles render correctly
+import MDXContent from '@theme/MDXContent';
+
+
+export default function Home() {
+  const {siteConfig} = useDocusaurusContext();
+  return (    
+      /* This container ensures your markdown isn't touching the edges of the screen */
+      <main className="container margin-vert--xl">
+        <MDXContent>
+          <MyMarkdownContent />
+        </MDXContent>
+      </main>
+  );
+}
+
+
+
 const FeatureList = [
   {
     title: 'Easy to Use',
@@ -49,7 +75,7 @@ function Feature({Svg, title, description}) {
   );
 }
 
-export default function HomepageFeatures() {
+/*export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
@@ -61,4 +87,4 @@ export default function HomepageFeatures() {
       </div>
     </section>
   );
-}
+}*/
