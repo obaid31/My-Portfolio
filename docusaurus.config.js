@@ -119,9 +119,9 @@ themes: ['docusaurus-theme-openapi-docs'],
             label: 'Portfolio',
           },
           {
-            label: 'API Reference', to: '/docs/api-reference/Endpoints', position: 'left'
+            label: 'API Reference', to: '/docs/api-reference/Endpoints/authentication', position: 'left'
           },
-          {to: '/changelog', label: 'Changelog', position: 'left'},
+          {to: '/docs/changelog', label: 'Changelog', position: 'left'},
           {
             href: 'https://github.com/obaid31',
             label: 'GitHub',
@@ -163,7 +163,7 @@ themes: ['docusaurus-theme-openapi-docs'],
             items: [
               {
                 label: 'Changelog',
-                to: '/changelog',
+                to: '/docs/changelog',
               },
               {
                 label: 'GitHub',
