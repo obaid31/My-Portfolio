@@ -119,7 +119,7 @@ themes: ['docusaurus-theme-openapi-docs'],
             label: 'Portfolio',
           },
           {
-            label: 'API Reference', to: '/docs/api-reference/Endpoints/authentication', position: 'left'
+            label: 'API Reference', to: '/docs/api-reference/authentication', position: 'left'
           },
           {to: '/docs/changelog', label: 'Changelog', position: 'left'},
           {
