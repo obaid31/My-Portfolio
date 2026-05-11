@@ -52,6 +52,8 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+
+          docItemComponent: "@theme/ApiItem",
         },
         blog: {
           showReadingTime: true,
@@ -116,7 +118,7 @@ themes: ['docusaurus-theme-openapi-docs'],
             type: 'docSidebar',
             sidebarId: 'mySidebar',
             position: 'left',
-            label: 'Portfolio',
+            label: 'Getting started',
           },
           {
             label: 'API Reference', to: '/docs/api-reference/authentication', position: 'left'

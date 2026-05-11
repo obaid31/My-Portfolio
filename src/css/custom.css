@@ -33,3 +33,36 @@
 code {
   font-family: 'Fira Code', monospace;
 }
+
+/* =============================================
+   Fix: Only the exact active page link is blue
+   ============================================= */
+
+/* --- NAVBAR --- */
+.navbar__link {
+  color: var(--ifm-navbar-link-color) !important;
+}
+.navbar__link--active {
+  color: var(--ifm-color-primary) !important;
+  font-weight: 600;
+}
+
+
+/* --- SIDEBAR --- */
+
+/* Reset ALL sidebar links to default color first */
+.menu__link,
+.menu__list-item-collapsible .menu__link,
+.menu__list-item-collapsible .menu__link--active {
+  color: var(--ifm-menu-color) !important;
+  font-weight: normal !important;
+  background: none !important;
+}
+
+/* Only the exact current page gets blue — aria-current="page" is set
+   by Docusaurus only on the link matching the current URL exactly */
+.menu__link[aria-current="page"] {
+  color: var(--ifm-color-primary) !important;
+  font-weight: 600 !important;
+  background: none !important;
+}

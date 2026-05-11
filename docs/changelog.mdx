@@ -1,0 +1,224 @@
+
+ 
+import Head from '@docusaurus/Head';
+ 
+<Head>
+  <style>{`
+    /* Let the row stretch full viewport width */
+    .main-wrapper .container {
+      max-width: 100% !important;
+      padding-left: 2rem !important;
+      padding-right: 0 !important;
+    }
+    /* Constrain only the article content, not the whole container */
+    .main-wrapper [class*="docItemCol"] {
+      max-width: 700px !important;
+      flex: 1 1 700px !important;
+      margin: 0 auto
+    }
+ 
+    /* Push TOC to fill remaining space all the way to the edge */
+    .main-wrapper [class*="col--3"] {
+      flex: 0 0 280px !important;
+      max-width: 280px !important;
+      margin-left: auto !important;
+      padding-left: 1rem !important;
+      padding-right: 0 !important;
+    }
+ 
+    /* TOC list flush to the right */
+    .main-wrapper [class*="col--3"] [class*="tableOfContents"],
+    .main-wrapper [class*="col--3"] .table-of-contents {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      width: 100% !important;
+    }
+  `}</style>
+</Head>
+
+
+# Changelog 
+ 
+> *A history of the API told like a story — because weather has always been dramatic.*
+ 
+---
+
+## 🌩️ v3.0 — "The Big Migration" — June 2024
+
+The one where everything changed, and nobody's `data/2.5` calls were safe anymore.
+
+After months of warnings, migration guides, and polite emails that many developers heroically ignored until the last moment, **One Call API 2.5 was officially retired in June 2024**. It had a good run. It served millions of requests. It will not be missed by the engineers who finally got to delete the legacy code.
+
+Its replacement, **One Call API 3.0**, was not exactly new — it had been available since 2022 — but this was the moment it became the only game in town. The good news: 3.0 works in almost exactly the same way as 2.5. The other news: it requires a credit card on file, even for free usage.
+
+### What's new in One Call API 3.0
+
+- **Minute-by-minute forecast for the next hour** — because sometimes you need to know exactly which 7 minutes of your lunch break it will rain.
+- **8-day daily forecast** — up from 7 days in 2.5.
+- **47+ years of historical archive** — weather data going all the way back to January 1, 1979, accessible both by specific timestamp and as daily aggregations.
+- **4-day forecast for any historical timestamp** — query what the forecast *was* for any past date. Great for auditing, research, and settling arguments.
+- **1.5-year long-term daily forecast** — plan your outdoor events with dangerous levels of optimism.
+- **Weather Overview** — an AI-generated, human-readable summary of today's and tomorrow's weather. Instead of parsing JSON and writing `"feels like X°C with Y% humidity"` yourself, let the API do the narrating.
+- **AI Weather Assistant** — ask natural language questions and get conversational weather answers. The assistant remembers the location you asked about last, which is more than can be said for some junior developers.
+
+### Migration notes
+
+| Old endpoint (2.5) | New endpoint (3.0) |
+|---|---|
+| `api.openweathermap.org/data/2.5/onecall` | `api.openweathermap.org/data/3.0/onecall` |
+| `api.openweathermap.org/data/2.5/onecall/timemachine` | `api.openweathermap.org/data/3.0/onecall/timemachine` |
+
+Response structure is largely identical. Update your version number, add a credit card, carry on.
+
+---
+
+## ☀️ Solar Irradiance API — "The Sun Finally Gets Its Own Endpoint"
+
+Renewable energy developers rejoiced. For the first time, OpenWeatherMap offered a dedicated API for solar irradiance data — not just temperature and clouds, but actual solar radiation values that matter to engineers building energy systems.
+
+### What it gives you
+
+- **GHI** (Global Horizontal Irradiance) — total solar radiation on a flat surface.
+- **DNI** (Direct Normal Irradiance) — radiation coming straight from the sun.
+- **DHI** (Diffuse Horizontal Irradiance) — radiation scattered by the atmosphere.
+- Both **clear-sky** and **cloudy-sky** models — so you know the theoretical maximum and the depressing reality.
+- **Current data + 15-day forecast**, plus a **47+ year historical archive** going back to January 1, 1979.
+- Granularity options of **1-hour** and **15-minute** intervals.
+
+**Base endpoint:**
+```
+GET https://api.openweathermap.org/energy/2.0/solar/interval_data
+    ?lat={lat}&lon={lon}&date={date}&interval=1h&appid={API_KEY}
+```
+
+---
+
+## 🔋 Solar Panel Energy Prediction API — "Now It's Personal"
+
+Taking solar data one step further, this API lets you input the technical specifications of actual solar panels and get back predicted power output — not just irradiance.
+
+- Create unlimited virtual panels for any location with custom specs.
+- Get **current + 15-day forecast** of panel power output.
+- **47+ years of historical data** to backtest system performance.
+- Perfect for grid management, energy trading decisions, and convincing your landlord to put panels on the roof.
+
+---
+
+## 🚗 Road Risk API — "Weather for People Who Drive Through It"
+
+For logistics, navigation, and fleet management use cases, the Road Risk API treats a route not as a single point but as a **sequence of coordinates with timestamps** — and returns weather conditions at each one.
+
+### What each point returns
+
+- Air temperature, wind speed, wind direction
+- Precipitation intensity
+- Dew point
+- **Road surface temperature** (US and EU territories)
+- **Black ice road state** (US and EU territories) — arguably the most useful boolean in the entire API
+- Active national weather alerts with hazard level
+
+### Coverage
+
+- **Forecast:** 5 days ahead, minute-level granularity for the first 2 hours, hourly for the rest.
+- **Historical:** 1 year back.
+
+**Use it for:** delivery routing, trucking operations, smart navigation apps, and any situation where "it looked fine on the map" has ever caused a problem.
+
+---
+
+## 🗺️ Weather Maps 2.0 — "15 Layers of Atmosphere"
+
+The maps API grew up. Version 2.0 added **1-hour time steps** for historical, current, and forecast map tiles, with 15 weather layers available:
+
+| Layer | Description |
+|-------|-------------|
+| `precipitation_new` | Precipitation intensity |
+| `wind_new` | Wind speed |
+| `temp_new` | Air temperature |
+| `clouds_new` | Cloud coverage |
+| `pressure_new` | Atmospheric pressure |
+
+Plus 10 more layers covering snow, humidity, and atmospheric conditions. All tiles follow the standard `{z}/{x}/{y}` format so they slot neatly into any map library.
+
+---
+
+## 🌫️ Air Pollution API — "What You're Actually Breathing"
+
+Added comprehensive air quality data including:
+
+- **AQI** (Air Quality Index) on the European scale (1–5)
+- Particulate matter: **PM2.5** and **PM10**
+- Gases: **CO**, **NO**, **NO₂**, **O₃**, **SO₂**, **NH₃**
+- Aerosol optical depth
+- Available as current, forecast, and historical data
+
+**Base endpoint:**
+```
+GET http://api.openweathermap.org/data/2.5/air_pollution
+    ?lat={lat}&lon={lon}&appid={API_KEY}
+```
+
+---
+
+## 📍 Geocoding API — "Goodbye, City IDs"
+
+The old approach of passing `?q=London` directly to weather endpoints was never reliable — there are a lot of Londons. The dedicated Geocoding API solves this cleanly.
+
+- **Forward geocoding:** city name or ZIP code → `lat`/`lon`
+- **Reverse geocoding:** `lat`/`lon` → location name
+- Returns up to 5 matches with country and state disambiguation
+- Supports ZIP/post codes with country code: `zip=10001,US`
+
+```
+GET http://api.openweathermap.org/geo/1.0/direct
+    ?q=Munich,DE&limit=1&appid={API_KEY}
+```
+
+> **Recommendation:** always resolve location to coordinates first, then pass `lat`/`lon` to weather endpoints. It is more accurate, more explicit, and will not accidentally return weather data for London, Ontario when you wanted London, UK.
+
+---
+
+## 📦 Authentication — Then & Now
+
+OpenWeatherMap has used a consistent authentication model throughout: a single `appid` query parameter appended to every request.
+
+```
+GET https://api.openweathermap.org/data/3.0/onecall
+    ?lat=48.8566&lon=2.3522&appid=YOUR_API_KEY
+```
+
+There is no OAuth, no token exchange, no Bearer header. Just your key in the URL. Simple, predictable, occasionally accidentally committed to public GitHub repositories.
+
+> **Keys activate within 2 hours of account creation.** A 401 error immediately after signup is normal — wait, then retry.
+
+---
+
+## 🗓️ Deprecation Timeline
+
+| Version / Feature | Status | Date |
+|---|---|---|
+| One Call API 2.5 | ❌ Retired | June 2024 |
+| `data/2.5/weather` (Current Weather) | ✅ Still active | — |
+| `data/2.5/forecast` (5-day / 3-hour) | ✅ Still active | — |
+| One Call API 3.0 | ✅ Current | Since 2022 |
+| Geocoding via city name in weather endpoints | ⚠️ Legacy | Use Geocoding API instead |
+
+---
+
+## 📋 Current API Surface (Quick Reference)
+
+| API | Endpoint Prefix | Notes |
+|-----|----------------|-------|
+| One Call 3.0 | `data/3.0/onecall` | All-in-one weather for a location |
+| Current Weather | `data/2.5/weather` | Still on v2.5, still working |
+| 5-day Forecast | `data/2.5/forecast` | 3-hour intervals |
+| Air Pollution | `data/2.5/air_pollution` | AQI + pollutant breakdown |
+| Geocoding | `geo/1.0/direct` | Name → coordinates |
+| Solar Irradiance | `energy/2.0/solar` | GHI, DNI, DHI |
+| Road Risk | `data/2.5/roadrisk` | Route-based weather + alerts |
+| Weather Maps | `maps/2.0` | Tile-based, 15 layers |
+
+---
+
+*Last updated: May 2026. For the official source of truth, see [openweathermap.org/api](https://openweathermap.org/api).*
+

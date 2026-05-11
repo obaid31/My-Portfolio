@@ -1,47 +1,43 @@
 ---
+id: intro
+title: Getting Started
+sidebar_label: Getting started 
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Getting Started with OpenWeatherMap
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to the OpenWeatherMap API documentation. This portal provides the technical specifications and implementation guides required to integrate global weather data into your applications.
 
-## Getting Started with OpenMapWeather API
+Our APIs provide high-precision meteorological data, including current weather, historical observations, and hyper-local forecasts.
 
-Get started by **creating a new site**.
+---
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Core Capabilities
 
-### What you'll need
+The OpenWeatherMap ecosystem is built on three primary data pillars:
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+* **Current Weather:** Real-time data for over 200,000 cities, updated every 10 minutes.
+* **Forecast Data:** Minute-by-minute, hourly, and daily projections.
+* **Historical Data:** Access to over 40 years of global climate archives.
 
-## Generate a new site
+---
 
-Generate a new Docusaurus site using the **classic template**.
+## Quickstart Path
 
-The classic template will automatically be added to your project after you run the command:
+To begin making requests, follow these three essential steps:
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+### 1. Provision an API Key
+All requests to the OpenWeatherMap infrastructure must be authenticated. 
+* Visit the [Account Dashboard](https://home.openweathermap.org/api_keys) to retrieve your default **AppID**.
+* Consult our [Authentication Guide](./api-reference/authentication.md) for security best practices.
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+### 2. Verify Your Subscription
+Different endpoints require different subscription tiers (Free, Professional, or Enterprise). Ensure your account has the necessary permissions for the specific endpoint you intend to call.
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+### 3. Execute Your First Request
+The simplest way to test your integration is via a `GET` request using geographic coordinates. 
 
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+**Request Template:**
+```http
+GET [https://api.openweathermap.org/data/2.5/weather?lat=](https://api.openweathermap.org/data/2.5/weather?lat=){lat}&lon={lon}&appid={YOUR_API_KEY}

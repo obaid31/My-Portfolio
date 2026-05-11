@@ -19,13 +19,9 @@ export default {
       label: 'API Reference',
       items: [
         'api-reference/authentication',
+        'api-reference/current-weather-data',
         'api-reference/errors',
       ],
-    },
-    {
-      type: 'doc',
-      id: 'changelog', // This links to changelog.md
-      label: 'Changelog',
     },
   ],
 };
